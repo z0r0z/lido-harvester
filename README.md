@@ -38,6 +38,8 @@ A minimal Solidity contract for harvesting Lido stETH yield. Accepts ETH or stET
 ```txt
 lib
 ├── forge-std — https://github.com/foundry-rs/forge-std
+script
+├── Harvest.s.sol — Harvest helper script
 src
 ├── LidoHarvester.sol — Harvester contract
 test
@@ -63,6 +65,48 @@ Tests run against an Ethereum mainnet fork (configured in `foundry.toml` via `et
 
 ```sh
 forge test --fork-url https://your-rpc-endpoint.com
+```
+
+## Harvest Script
+
+Check available yield, profitability, and generate harvest calldata:
+
+```sh
+forge script script/Harvest.s.sol
+```
+
+Output includes:
+- Current stETH balance vs staked principal
+- Harvestable yield and Curve swap quote with slippage check
+- Profitability estimate using live gas price (`eth_gasPrice`) and dynamic gas estimation (`eth_estimateGas`)
+- Ready-to-use `cast send` command with encoded calldata (includes `min_dy` from Curve quote for sandwich protection)
+
+The script also writes `harvest-output.json` for bot/keeper automation:
+
+```json
+{
+  "profitable": true,
+  "yield": 6677639401144,
+  "expectedOut": 6672944100895,
+  "gasCost": 12893001905600,
+  "curveData": "0x3df02124..."
+}
+```
+
+A keeper bot can run the script, check `profitable`, and submit `curveData` to `harvest(bytes)`:
+
+```sh
+forge script script/Harvest.s.sol && \
+  jq -e '.profitable' harvest-output.json && \
+  cast send 0x0000000000BB8A44A568Ff0a9ef0E7fc20768E22 \
+    "harvest(bytes)" $(jq -r '.curveData' harvest-output.json) \
+    --private-key $PRIVATE_KEY
+```
+
+To use a different RPC:
+
+```sh
+forge script script/Harvest.s.sol --rpc-url https://your-rpc-endpoint.com
 ```
 
 ## Deployment

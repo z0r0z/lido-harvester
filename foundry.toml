@@ -10,5 +10,9 @@ remappings = [
   "@forge=lib/forge-std/src/"
 ]
 
+fs_permissions = [
+  { access = "write", path = "harvest-output.json" }
+]
+
 [fmt]
 line_length = 100
