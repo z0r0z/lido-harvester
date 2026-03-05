@@ -56,11 +56,11 @@ contract LidoHarvester {
     }
 
     constructor() payable {
-        emit OwnershipTransferred(address(0), owner = msg.sender);
+        emit OwnershipTransferred(address(0), owner = tx.origin);
     }
 
     receive() external payable {
-        assembly { if tload(0) { return(0, 0) } }
+        assembly ("memory-safe") { if tload(0) { return(0, 0) } }
         uint256 stethBal = IERC20(STETH).balanceOf(address(this));
         (bool ok,) = STETH.call{value: msg.value}("");
         require(ok);
@@ -111,9 +111,9 @@ contract LidoHarvester {
         uint256 stethBal = IERC20(STETH).balanceOf(address(this));
         if (stethBal <= _staked) return 0;
         unchecked { yield = stethBal - _staked; }
-        assembly { tstore(0, 1) }
+        assembly ("memory-safe") { tstore(0, 1) }
         (bool ok,) = _target.call(data);
-        assembly { tstore(0, 0) }
+        assembly ("memory-safe") { tstore(0, 0) }
         require(ok);
         unchecked {
             require(address(this).balance >= ethBal + yield * (10000 - slipBps) / 10000);

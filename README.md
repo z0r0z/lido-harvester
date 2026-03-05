@@ -67,7 +67,7 @@ forge test --fork-url https://your-rpc-endpoint.com
 
 ## Deployment
 
-[`0x0000000000883fEE47BfC9879478955eef9539dA`](https://etherscan.io/address/0x0000000000883fEE47BfC9879478955eef9539dA#code)
+[`0x0000000000BB8A44A568Ff0a9ef0E7fc20768E22`](https://etherscan.io/address/0x0000000000BB8A44A568Ff0a9ef0E7fc20768E22#code)
 
 ## Security
 

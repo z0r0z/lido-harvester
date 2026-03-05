@@ -20,6 +20,8 @@ contract LidoHarvesterTest is Test {
         owner = address(this);
         // Ensure alice is an EOA on the fork (no code)
         vm.etch(alice, "");
+        // Constructor uses tx.origin for owner (factory-compatible)
+        vm.prank(owner, owner);
         h = new LidoHarvester();
     }
 
