@@ -65,6 +65,14 @@ Tests run against an Ethereum mainnet fork (configured in `foundry.toml` via `et
 forge test --fork-url https://your-rpc-endpoint.com
 ```
 
+## Deployment
+
+[`0x0000000000883fEE47BfC9879478955eef9539dA`](https://etherscan.io/address/0x0000000000883fEE47BfC9879478955eef9539dA#code)
+
+## Security
+
+Audited by [Zellic V12](https://zellic.ai/) AI scan — [report](./audit/zellic-V12-AI-scan/z0r0z_lido_harvester__main_89d9448_findings_2026-03-05-findings.md). No valid findings.
+
 ## Disclaimer
 
 *These smart contracts and testing suite are being provided as is. No guarantee, representation or warranty is being made, express or implied, as to the safety or correctness of anything provided herein or through related user interfaces. This repository and related code have not been audited and as such there can be no assurance anything will work as intended, and users may experience delays, failures, errors, omissions, loss of transmitted information or loss of funds. The creators are not liable for any of the foregoing. Users should proceed with caution and use at their own risk.*
