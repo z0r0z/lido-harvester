@@ -1,6 +1,6 @@
 LidoHarvesterTest:test_constructor_setsOwner() (gas: 12666)
-LidoHarvesterTest:test_deposit_revert_noApproval() (gas: 95635)
-LidoHarvesterTest:test_deposit_stETH() (gas: 172772)
+LidoHarvesterTest:test_deposit_revert_noApproval() (gas: 104171)
+LidoHarvesterTest:test_deposit_stETH() (gas: 185850)
 LidoHarvesterTest:test_fullCycle_deposit_harvest_withdraw_stake() (gas: 442598)
 LidoHarvesterTest:test_harvest_callableByNonOwner() (gas: 353540)
 LidoHarvesterTest:test_harvest_noYield_returnsZero() (gas: 196368)

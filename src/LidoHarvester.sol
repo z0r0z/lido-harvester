@@ -68,8 +68,9 @@ contract LidoHarvester {
     }
 
     function deposit(uint256 amt) public payable {
+        uint256 stethBal = IERC20(STETH).balanceOf(address(this));
         require(IERC20(STETH).transferFrom(msg.sender, address(this), amt));
-        unchecked { staked += amt; }
+        unchecked { staked += IERC20(STETH).balanceOf(address(this)) - stethBal; }
     }
 
     function withdraw(address to, uint256 val, bytes calldata data, uint256 minGain) public payable onlyOwner {
